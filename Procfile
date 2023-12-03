@@ -1,1 +1,1 @@
-web: java -jar target/cv_backend.jar
+web: java -jar target/spring-boot-rest-0.0.1-SNAPSHOT.jar
