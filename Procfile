@@ -1,1 +1,1 @@
-web: java -jar target/cv-backend.jar
+web: java -jar target/cv_backend.jar
