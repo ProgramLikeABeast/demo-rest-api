@@ -27,7 +27,7 @@ public class DataRestController {
         strategyService = theStrategyService;
     }
 
-    @GetMapping("welcome")
+    @GetMapping("/welcome")
     public String welcome() {
         return "Hello World!";
     }
