@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cv_backend
+  template:
+    metadata:
+      labels:
+        app: cv_backend
+    spec:
+      containers:
+        - name: my-container
+          image: gcr.io/white-codex-406119/cv_image
+          ports:
+            - containerPort: 8080

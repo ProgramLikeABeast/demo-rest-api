@@ -27,6 +27,11 @@ public class DataRestController {
         strategyService = theStrategyService;
     }
 
+    @GetMapping("welcome")
+    public String welcome() {
+        return "Hello World!";
+    }
+
     // select all
     @GetMapping("/users")
     public List<User> findAll() {
@@ -103,6 +108,12 @@ public class DataRestController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("File not found");
         }
+    }
+
+    @GetMapping("/strategies/getJson/{theId}")
+    public Strategy saveStrategyJsonLocally(@PathVariable int theId) {
+        Strategy theStrategy = strategyService.findById(theId);
+        return theStrategy;
     }
 
     // upload one
