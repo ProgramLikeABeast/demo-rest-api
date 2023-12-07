@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/data")
 public class DataRestController {
     // expose "/user" and return a list of Users
     private UserService userService;
@@ -27,7 +26,7 @@ public class DataRestController {
         strategyService = theStrategyService;
     }
 
-    @GetMapping("/welcome")
+    @GetMapping("/")
     public String welcome() {
         return "Hello World!";
     }
