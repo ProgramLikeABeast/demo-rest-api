@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/spring-boot-rest-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -Xmx1024m -jar target/spring-boot-rest-0.0.1-SNAPSHOT.jar
