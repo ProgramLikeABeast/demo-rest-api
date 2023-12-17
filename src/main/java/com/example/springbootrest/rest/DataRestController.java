@@ -92,7 +92,7 @@ public class DataRestController {
 
     // select one
     // This method saves the file data to a local file
-    @GetMapping("/strategies/{theId}")
+    /*@GetMapping("/strategies/{theId}")
     public ResponseEntity<String> saveStrategiesLocally(@PathVariable int theId) {
         Strategy fileEntity = strategyService.findById(theId);
 
@@ -109,15 +109,20 @@ public class DataRestController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("File not found");
         }
-    }
+    }*/
 
-    /*@GetMapping("/strategies/{theId}")
-    public ResponseEntity<Strategy> getStrategyFile(@PathVariable int theId) {
+    @GetMapping("/strategies/{theId}")
+    public ResponseEntity<byte []> getStrategyFile(@PathVariable int theId) {
         Strategy theStrategy = strategyService.findById(theId);
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("file-name", theStrategy.getFilename());
+        headers.add("content-type", theStrategy.getContentType());
+
         return ResponseEntity.ok()
-                .body(theStrategy);
-    }*/
+                .headers(headers)
+                .body(theStrategy.getFileData());
+    }
 
     @GetMapping("/strategies/getJson/{theId}")
     public Strategy saveStrategyJsonLocally(@PathVariable int theId) {
