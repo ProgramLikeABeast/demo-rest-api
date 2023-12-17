@@ -5,6 +5,8 @@ import com.example.springbootrest.entity.User;
 import com.example.springbootrest.service.StrategyService;
 import com.example.springbootrest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -108,6 +110,14 @@ public class DataRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("File not found");
         }
     }
+
+    /*@GetMapping("/strategies/{theId}")
+    public ResponseEntity<Strategy> getStrategyFile(@PathVariable int theId) {
+        Strategy theStrategy = strategyService.findById(theId);
+
+        return ResponseEntity.ok()
+                .body(theStrategy);
+    }*/
 
     @GetMapping("/strategies/getJson/{theId}")
     public Strategy saveStrategyJsonLocally(@PathVariable int theId) {
