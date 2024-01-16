@@ -2,17 +2,18 @@ package com.example.springbootrest.rest;
 
 import com.example.springbootrest.entity.Strategy;
 import com.example.springbootrest.entity.User;
+import com.example.springbootrest.entity.Widget;
+import com.example.springbootrest.entity.WidgetInfo;
 import com.example.springbootrest.service.StrategyService;
 import com.example.springbootrest.service.UserService;
+import com.example.springbootrest.service.WidgetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,11 +22,17 @@ public class DataRestController {
     // expose "/user" and return a list of Users
     private UserService userService;
     private StrategyService strategyService;
+    private WidgetService widgetService;
     // inject user dao
     @Autowired
-    public DataRestController(UserService theUserService, StrategyService theStrategyService) {
+    public DataRestController(
+            UserService theUserService,
+            StrategyService theStrategyService,
+            WidgetService theWidgetService
+            ) {
         userService = theUserService;
         strategyService = theStrategyService;
+        widgetService = theWidgetService;
     }
 
     @GetMapping("/")
@@ -132,7 +139,7 @@ public class DataRestController {
 
     // upload one
     @PostMapping(value="/strategies", consumes = {"multipart/form-data"})
-    public ResponseEntity<String> strategyUpload(@RequestParam(value="any_file", required=false) MultipartFile file) {
+    public ResponseEntity<String> uploadStrategy(@RequestParam(value="any_file", required=false) MultipartFile file) {
         try {
             Strategy theStrategyFile = strategyService.saveFile(file);
             return ResponseEntity.ok("File uploaded successfully. File ID: " + theStrategyFile.getId());
@@ -145,5 +152,47 @@ public class DataRestController {
     public String deleteAllStrategies() {
         strategyService.deleteAll();
         return "Deleted all strategies.";
+    }
+
+
+    // load a widget
+    @GetMapping("/widgets/{theId}")
+    public ResponseEntity<byte []> getWidget(@PathVariable int theId) {
+        Widget theWidget = widgetService.findById(theId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("file-name", theWidget.getLarge_image_filename());
+        headers.add("content-type", theWidget.getLarge_image_content_type());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(theWidget.getLarge_image_data());
+    }
+
+    // upload a widget
+    @PostMapping(value="/widgets", consumes = {"multipart/form-data"})
+    public ResponseEntity<String> uploadWidget(@RequestParam(value="avatar_image", required=false) MultipartFile avatar_image,
+                                               @RequestParam(value="large_image", required=false) MultipartFile large_image,
+                                               @RequestParam String widget_name,
+                                               @RequestParam String description,
+                                               @RequestParam String bg_color
+                                               ) throws IOException {
+        Widget theWidget = new Widget(
+                widget_name,
+                description,
+                bg_color,
+                avatar_image.getContentType(),
+                avatar_image.getOriginalFilename(),
+                avatar_image.getBytes(),
+                large_image.getContentType(),
+                large_image.getOriginalFilename(),
+                large_image.getBytes()
+                );
+        try {
+            widgetService.saveWidget(theWidget);
+            return ResponseEntity.ok("Widget uploaded successfully. File ID: " + theWidget.getId());
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload the widget");
+        }
     }
 }
