@@ -3,9 +3,9 @@ package com.example.springbootrest.entity;
 public class WidgetInfo {
     private String name;
     private String description;
-    private Integer color;
+    private String color;
 
-    public WidgetInfo(String name, String description, Integer color) {
+    public WidgetInfo(String name, String description, String color) {
         this.name = name;
         this.description = description;
         this.color = color;
@@ -27,11 +27,11 @@ public class WidgetInfo {
         this.description = description;
     }
 
-    public Integer getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Integer color) {
+    public void setColor(String color) {
         this.color = color;
     }
 }
