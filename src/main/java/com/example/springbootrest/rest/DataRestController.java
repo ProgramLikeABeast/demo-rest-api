@@ -154,6 +154,10 @@ public class DataRestController {
         return "Deleted all strategies.";
     }
 
+    @GetMapping("/widgets/count")
+    public long getWidgetCount() {
+        return widgetService.getcount();
+    }
     // load a widget
     @GetMapping("/widgets/{theId}")
     public WidgetInfo getWidget(@PathVariable int theId) {

@@ -10,4 +10,5 @@ public interface WidgetService {
     Widget findById(int theId);
     Widget saveWidget(Widget theWidget) throws IOException;
     void deleteAll();
+    long getcount();
 }

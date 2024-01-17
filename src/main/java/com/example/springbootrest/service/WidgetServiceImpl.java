@@ -4,6 +4,7 @@ import com.example.springbootrest.DAO.StrategyRepository;
 import com.example.springbootrest.DAO.WidgetRepository;
 import com.example.springbootrest.entity.Strategy;
 import com.example.springbootrest.entity.Widget;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,5 +53,10 @@ public class WidgetServiceImpl implements WidgetService{
     @Override
     public void deleteAll() {
         widgetRepository.deleteAll();
+    }
+
+    @Override
+    public long getcount() {
+        return widgetRepository.count();
     }
 }
