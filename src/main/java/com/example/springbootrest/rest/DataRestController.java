@@ -154,20 +154,30 @@ public class DataRestController {
         return "Deleted all strategies.";
     }
 
-
     // load a widget
     @GetMapping("/widgets/{theId}")
-    public ResponseEntity<byte []> getWidget(@PathVariable int theId) {
+    public WidgetInfo getWidget(@PathVariable int theId) {
         Widget theWidget = widgetService.findById(theId);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("file-name", theWidget.getLarge_image_filename());
-        headers.add("content-type", theWidget.getLarge_image_content_type());
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(theWidget.getLarge_image_data());
+        return new WidgetInfo(theWidget.getWidget_name(),
+                          theWidget.getText_description(),
+                          theWidget.getBg_color()
+                          );
     }
+
+//    // load a widget
+//    @GetMapping("/widgets/{theId}")
+//    public ResponseEntity<byte []> getWidget(@PathVariable int theId) {
+//        Widget theWidget = widgetService.findById(theId);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("file-name", theWidget.getLarge_image_filename());
+//        headers.add("content-type", theWidget.getLarge_image_content_type());
+//
+//        return ResponseEntity.ok()
+//                .headers(headers)
+//                .body(theWidget.getLarge_image_data());
+//    }
 
     // upload a widget
     @PostMapping(value="/widgets", consumes = {"multipart/form-data"})
