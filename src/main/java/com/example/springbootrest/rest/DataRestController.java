@@ -189,7 +189,7 @@ public class DataRestController {
                                                @RequestParam(value="large_image", required=false) MultipartFile large_image,
                                                @RequestParam String widget_name,
                                                @RequestParam String description,
-                                               @RequestParam String bg_color
+                                               @RequestParam Integer bg_color
                                                ) throws IOException {
         Widget theWidget = new Widget(
                 widget_name,

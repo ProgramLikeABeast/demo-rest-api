@@ -29,11 +29,11 @@ public class Widget {
     @Column
     private byte[] large_image_data;
     @Column
-    private String bg_color;
+    private Integer bg_color;
 
     public Widget() {}
 
-    public Widget(String widget_name, String text_description, String bg_color, String avatar_image_content_type, String avatar_image_filename, byte[] avatar_image_data, String large_image_content_type, String large_image_filename, byte[] large_image_data) {
+    public Widget(String widget_name, String text_description, Integer bg_color, String avatar_image_content_type, String avatar_image_filename, byte[] avatar_image_data, String large_image_content_type, String large_image_filename, byte[] large_image_data) {
         this.widget_name = widget_name;
         this.text_description = text_description;
         this.avatar_image_content_type = avatar_image_content_type;
@@ -85,11 +85,11 @@ public class Widget {
         this.large_image_data = large_image_data;
     }
 
-    public String getBg_color() {
+    public Integer getBg_color() {
         return bg_color;
     }
 
-    public void setBg_color(String bg_color) {
+    public void setBg_color(Integer bg_color) {
         this.bg_color = bg_color;
     }
 
