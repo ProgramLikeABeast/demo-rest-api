@@ -37,7 +37,7 @@ public class DataRestController {
 
     @GetMapping("/")
     public String welcome() {
-        return "Hello World!";
+        return "Hello World! <a href=\"/login\">Login</a> <a href=\"/logout\">Logout</a> <a href=\"/user_profile\">user</a>";
     }
 
     // select all
