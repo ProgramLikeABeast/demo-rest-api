@@ -169,19 +169,19 @@ public class DataRestController {
                           );
     }
 
-//    // load a widget
-//    @GetMapping("/widgets/{theId}")
-//    public ResponseEntity<byte []> getWidget(@PathVariable int theId) {
-//        Widget theWidget = widgetService.findById(theId);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add("file-name", theWidget.getLarge_image_filename());
-//        headers.add("content-type", theWidget.getLarge_image_content_type());
-//
-//        return ResponseEntity.ok()
-//                .headers(headers)
-//                .body(theWidget.getLarge_image_data());
-//    }
+    // load a widget pict
+    @GetMapping("/widgets/pict/{theId}")
+    public ResponseEntity<byte []> getWidgetPict(@PathVariable int theId) {
+        Widget theWidget = widgetService.findById(theId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("file-name", theWidget.getLarge_image_filename());
+        headers.add("content-type", theWidget.getLarge_image_content_type());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(theWidget.getLarge_image_data());
+    }
 
     // upload a widget
     @PostMapping(value="/widgets", consumes = {"multipart/form-data"})
@@ -208,5 +208,12 @@ public class DataRestController {
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload the widget");
         }
+    }
+
+    // Delete all widgets
+    @DeleteMapping("/widgets")
+    public String deleteAllWidgets() {
+        widgetService.deleteAll();
+        return "Deleted all widgets.";
     }
 }
