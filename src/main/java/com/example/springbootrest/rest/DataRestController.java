@@ -95,6 +95,10 @@ public class DataRestController {
         return "Deleted all users.";
     }
 
+    @GetMapping("/users/{email}/{password}")
+    public boolean loginAttempt(@PathVariable String email, @PathVariable String password) {
+        return userService.checkUserExistence(email, password);
+    }
     // Strategy Section
 
     // select one
@@ -158,6 +162,7 @@ public class DataRestController {
     public long getWidgetCount() {
         return widgetService.getcount();
     }
+
     // load a widget
     @GetMapping("/widgets/{theId}")
     public WidgetInfo getWidget(@PathVariable int theId) {
