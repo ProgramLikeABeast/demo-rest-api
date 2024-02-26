@@ -12,13 +12,18 @@ public class User {
     // define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="uid")
     private int id;
+    @Column(name="phone")
+    private String phone;
     @Column(name="username")
     private String username;
     @Column(name="pwd")
     private String password;
     @Column(name="email")
     private String email;
+    @Column(name="momo_coins")
+    private int momo_coins;
 
     public int getId() {
         return id;
@@ -26,6 +31,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getUsername() {
@@ -52,13 +65,23 @@ public class User {
         this.email = email;
     }
 
+    public int getMomo_coins() {
+        return momo_coins;
+    }
+
+    public void setMomo_coins(int momo_coins) {
+        this.momo_coins = momo_coins;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", phone='" + phone + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", momo_coins=" + momo_coins +
                 '}';
     }
 }
