@@ -12,8 +12,7 @@ public class User {
     // define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="uid")
-    private int id;
+    private int uid;
     @Column(name="phone")
     private String phone;
     @Column(name="username")
@@ -25,12 +24,12 @@ public class User {
     @Column(name="momo_coins")
     private int momo_coins;
 
-    public int getId() {
-        return id;
+    public int getUid() {
+        return uid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int uid) {
+        this.uid = uid;
     }
 
     public String getPhone() {
@@ -76,7 +75,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + uid +
                 ", phone='" + phone + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
