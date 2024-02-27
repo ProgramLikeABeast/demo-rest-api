@@ -49,4 +49,10 @@ public class UserServiceImpl implements UserService {
     public void deleteAll() {
         userRepository.deleteAll();
     }
+
+    @Override
+    public boolean checkUserExistence(String email, String pwd) {
+        List<User> retList = userRepository.findUsersByEmailAndPassword(email, pwd);
+        return !retList.isEmpty();
+    }
 }

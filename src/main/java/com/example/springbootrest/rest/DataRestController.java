@@ -4,6 +4,8 @@ import com.example.springbootrest.entity.Strategy;
 import com.example.springbootrest.entity.User;
 import com.example.springbootrest.entity.Widget;
 import com.example.springbootrest.entity.WidgetInfo;
+import com.example.springbootrest.entity.Product;
+import com.example.springbootrest.service.ProductService;
 import com.example.springbootrest.service.StrategyService;
 import com.example.springbootrest.service.UserService;
 import com.example.springbootrest.service.WidgetService;
@@ -23,16 +25,19 @@ public class DataRestController {
     private UserService userService;
     private StrategyService strategyService;
     private WidgetService widgetService;
+    private ProductService productService;
     // inject user dao
     @Autowired
-    public DataRestController(
+    public  DataRestController(
             UserService theUserService,
             StrategyService theStrategyService,
-            WidgetService theWidgetService
+            WidgetService theWidgetService,
+            ProductService theProductService
             ) {
         userService = theUserService;
         strategyService = theStrategyService;
         widgetService = theWidgetService;
+        productService = theProductService;
     }
 
     @GetMapping("/")
@@ -42,7 +47,7 @@ public class DataRestController {
 
     // select all
     @GetMapping("/users")
-    public List<User> findAll() {
+    public List<User> findAllUsers() {
         return userService.findAll();
     }
 
@@ -63,8 +68,7 @@ public class DataRestController {
         // in case they pass an id on JSON ... set id to 0
         // is to force a save of a new item ... instead of update
         theUser.setId(0);
-        User dbUser = userService.save(theUser);
-        return dbUser;
+        return userService.save(theUser);
     }
 
     // Update one
@@ -95,6 +99,10 @@ public class DataRestController {
         return "Deleted all users.";
     }
 
+    @GetMapping("/users/{email}/{password}")
+    public boolean loginAttempt(@PathVariable String email, @PathVariable String password) {
+        return userService.checkUserExistence(email, password);
+    }
     // Strategy Section
 
     // select one
@@ -158,6 +166,7 @@ public class DataRestController {
     public long getWidgetCount() {
         return widgetService.getcount();
     }
+
     // load a widget
     @GetMapping("/widgets/{theId}")
     public WidgetInfo getWidget(@PathVariable int theId) {
@@ -214,6 +223,39 @@ public class DataRestController {
     @DeleteMapping("/widgets")
     public String deleteAllWidgets() {
         widgetService.deleteAll();
+        return "Deleted all widgets.";
+    }
+
+    // product endpoints
+    @PostMapping(value="/products")
+    public Product uploadProduct(@RequestBody Product theProduct) throws IOException {
+        theProduct.setPid(0);
+        return productService.saveProduct(theProduct);
+    }
+
+    @GetMapping ("/products/count")
+    public long getProductCount(){
+        return productService.getcount();
+    }
+
+    @GetMapping("/products/{productId}")
+    public Product getProduct(@PathVariable int productId) {
+        Product theProduct = productService.findById(productId);
+
+        if(theProduct == null) {
+            throw new RuntimeException("User id not found - " + productId);
+        }
+        return theProduct;
+    }
+
+    @GetMapping("/products")
+    public List<Product> findAllProducts() {
+        return productService.findAll();
+    }
+
+    @DeleteMapping("/products")
+    public String deleteAllProducts() {
+        productService.deleteAll();
         return "Deleted all widgets.";
     }
 }
