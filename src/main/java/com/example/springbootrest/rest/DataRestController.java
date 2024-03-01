@@ -1,14 +1,7 @@
 package com.example.springbootrest.rest;
 
-import com.example.springbootrest.entity.Strategy;
-import com.example.springbootrest.entity.User;
-import com.example.springbootrest.entity.Widget;
-import com.example.springbootrest.entity.WidgetInfo;
-import com.example.springbootrest.entity.Product;
-import com.example.springbootrest.service.ProductService;
-import com.example.springbootrest.service.StrategyService;
-import com.example.springbootrest.service.UserService;
-import com.example.springbootrest.service.WidgetService;
+import com.example.springbootrest.entity.*;
+import com.example.springbootrest.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,18 +19,21 @@ public class DataRestController {
     private StrategyService strategyService;
     private WidgetService widgetService;
     private ProductService productService;
+    private SmallImageService smallImageService;
     // inject user dao
     @Autowired
     public  DataRestController(
             UserService theUserService,
             StrategyService theStrategyService,
             WidgetService theWidgetService,
-            ProductService theProductService
+            ProductService theProductService,
+            SmallImageService theSmallImageService
             ) {
         userService = theUserService;
         strategyService = theStrategyService;
         widgetService = theWidgetService;
         productService = theProductService;
+        smallImageService = theSmallImageService;
     }
 
     @GetMapping("/")
@@ -162,6 +158,13 @@ public class DataRestController {
         return "Deleted all strategies.";
     }
 
+
+
+
+
+
+    // widget endpoints
+
     @GetMapping("/widgets/count")
     public long getWidgetCount() {
         return widgetService.getcount();
@@ -226,7 +229,13 @@ public class DataRestController {
         return "Deleted all widgets.";
     }
 
+
+
+
+
+
     // product endpoints
+
     @PostMapping(value="/products")
     public Product uploadProduct(@RequestBody Product theProduct) throws IOException {
         theProduct.setPid(0);
@@ -256,6 +265,55 @@ public class DataRestController {
     @DeleteMapping("/products")
     public String deleteAllProducts() {
         productService.deleteAll();
-        return "Deleted all widgets.";
+        return "Deleted all products.";
+    }
+
+
+
+
+
+    // small_image endpoints
+    @GetMapping("/small_images/count")
+    public long getSmallImageCount() {
+        return smallImageService.getcount();
+    }
+
+    @GetMapping("/small_images/{theId}")
+    public ResponseEntity<byte []> loadSmallImage(@PathVariable int theId) {
+        SmallImage theImage = smallImageService.findById(theId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("file-name", theImage.getImage_name());
+        headers.add("content-type", theImage.getContent_type());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(theImage.getImage_data());
+    }
+
+    @PostMapping(value="/small_images", consumes = {"multipart/form-data"})
+    public ResponseEntity<String> uploadSmallImage(
+            @RequestParam(value="image", required=false) MultipartFile theImage,
+            @RequestParam(value="name", required=true) String name,
+            @RequestParam(value="pid", required=true) Integer pid
+    ) throws IOException {
+        SmallImage retImage = new SmallImage(
+                pid,
+                name,
+                theImage.getContentType(),
+                theImage.getBytes()
+        );
+        try {
+            smallImageService.saveImage(retImage);
+            return ResponseEntity.ok("Small image uploaded successfully. File ID: " + retImage.getSiid());
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload the small image");
+        }
+    }
+
+    @DeleteMapping("/small_images")
+    public String deleteAllSmallImages() {
+        smallImageService.deleteAll();
+        return "Deleted all small images.";
     }
 }

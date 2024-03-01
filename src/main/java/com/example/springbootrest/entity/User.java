@@ -21,8 +21,8 @@ public class User {
     private String password;
     @Column(name="email")
     private String email;
-    @Column(name="momo_coins")
-    private int momo_coins;
+    @Column(name="momo_stamp")
+    private int momo_stamp;
 
     public int getUid() {
         return uid;
@@ -64,12 +64,12 @@ public class User {
         this.email = email;
     }
 
-    public int getMomo_coins() {
-        return momo_coins;
+    public int getMomo_stamp() {
+        return momo_stamp;
     }
 
-    public void setMomo_coins(int momo_coins) {
-        this.momo_coins = momo_coins;
+    public void setMomo_stamp(int momo_coins) {
+        this.momo_stamp = momo_coins;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", momo_coins=" + momo_coins +
+                ", momo_coins=" + momo_stamp +
                 '}';
     }
 }
