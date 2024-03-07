@@ -1,0 +1,80 @@
+pid,product_name,cid,product_desc,base_price,has_flavor,enable_hot,enable_cold,enable_large,avail_sugar_level,avail_ice_level,topping_blacklist,free_topping_quantity,ice_cream_container,tags
+1,Yuzu Orange,1,null,6.75,0,0,1,0,null,null,null,0,null,null
+2,Pink Lady Grapefruit,1,null,6.75,0,0,1,0,null,null,null,0,null,null
+3,Orange Flow,1,null,6.75,0,0,1,0,null,null,null,0,null,null
+4,Osmanthus Pear Tea,1,null,6.95,0,0,1,0,null,null,null,0,null,null
+5,Key Lime Green Tea,1,null,6.75,0,0,1,0,null,null,null,0,null,null
+6,Watermelon Splash (Seasonal),1,null,6.75,0,0,1,0,null,null,null,0,null,null
+7,Pineapple Grapefruit,1,null,7.25,0,0,1,0,null,null,null,0,null,null
+8,Super Citrus Fruit Tea,1,null,7.25,0,0,1,0,null,null,null,0,null,null
+9,Peach on the Beach (Seasonal),1,null,7.45,0,0,1,0,null,null,null,0,null,null
+10,Green Grape Flash Brew,1,null,7.25,0,0,1,1,null,null,null,0,null,null
+11,Earl Grey Cheese Tea,2,null,5.45,0,0,1,1,null,null,null,0,null,null
+12,Green Cheese Tea,2,null,5.45,0,0,1,1,null,null,null,0,null,null
+13,Black Cheese Tea,2,null,5.45,0,0,1,1,null,null,null,0,null,null
+14,Oolong Cheese Tea,2,null,5.45,0,0,1,1,null,null,null,0,null,null
+15,Jasmine Cheese Tea,2,null,5.45,0,0,1,1,null,null,null,0,null,null
+16,Peach Oolong Cheese Tea,2,null,5.45,0,0,1,1,null,null,null,0,null,null
+17,Milk Cheese Tea,2,null,5.95,0,0,1,1,null,null,null,0,null,null
+18,Matcha Cheese Tea,2,null,5.95,0,0,1,1,null,null,null,0,null,null
+19,Caramel Brulee Cheese Tea,2,null,6.15,0,0,1,1,null,null,null,0,null,null
+20,Strawberry Cheese Tea,3,null,6.95,0,0,1,0,null,null,null,0,null,null
+21,Mango Cheese Tea,3,null,6.95,0,0,1,0,null,null,null,0,null,null
+22,Grape Cheese Tea,3,null,6.95,0,0,1,0,null,null,null,0,null,null
+23,Pina Colada Cheese Tea (Seasonal),3,null,6.95,0,0,1,0,null,null,null,0,null,null
+24,Peach Cheese Tea (Seasonal),3,null,7.45,0,0,1,0,null,null,null,0,null,null
+25,Dragon Fruit Cheese Tea (Seasonal),3,null,9.95,0,0,1,0,null,null,null,0,null,null
+26,Green Grape Cheese Tea,3,null,7.45,0,0,1,0,null,null,null,0,null,null
+27,Strawberry Love Potion,4,null,7.15,0,0,1,0,null,null,null,0,null,null
+28,Mango Love Potion,4,null,7.15,0,0,1,0,null,null,null,0,null,null
+29,Grape Love Potion,4,null,7.15,0,0,1,0,null,null,null,0,null,null
+30,Lychee Love Potion,4,null,7.15,0,0,1,0,null,null,null,0,null,null
+31,Pineapple Love Potion,4,null,7.15,0,0,1,0,null,null,null,0,null,null
+32,Peach Love Potion,4,null,7.45,0,0,1,0,null,null,null,0,null,null
+33,Momotaro Milk Tea,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+34,Hong Kong Milk Tea,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+35,Matcha Latte,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+36,Taro Milk Tea,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+37,California Milk Tea,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+38,Coffee Milk Tea,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+39,Honeydew Milk Tea,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+40,Bangkok Milk Tea,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+41,Rose Milk Tea,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+42,Hibiscus Blend,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+43,O.P.O.G Tea,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+44,Pink Elephant,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+45,Tropical Osmanthus,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+46,Lady Grey,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+47,Lychee Green,5,null,5.25,0,1,1,1,null,null,null,1,null,null
+48,Black Milk Tea,6,null,5.25,0,1,1,1,null,null,null,1,null,null
+49,Green Milk Tea,6,null,5.25,0,1,1,1,null,null,null,1,null,null
+50,Oolong Milk Tea,6,null,5.25,0,1,1,1,null,null,null,1,null,null
+51,Assam Milk Tea,6,null,5.25,0,1,1,1,null,null,null,1,null,null
+52,Jasmine Milk Tea,6,null,5.25,0,1,1,1,null,null,null,1,null,null
+53,Hojicha Milk Tea,6,null,5.25,0,1,1,1,null,null,null,1,null,null
+54,Roasted Oolong Milk Tea,6,null,5.25,0,1,1,1,null,null,null,1,null,null
+55,Assam,7,null,5.25,1,1,1,1,null,null,null,1,null,null
+56,Green Tea,7,null,5.25,1,1,1,1,null,null,null,1,null,null
+57,Oolong Tea,7,null,5.25,1,1,1,1,null,null,null,1,null,null
+58,Peach Oolong Tea,7,null,5.25,1,1,1,1,null,null,null,1,null,null
+59,Jasmine,7,null,5.25,1,1,1,1,null,null,null,1,null,null
+60,Black,7,null,5.25,1,1,1,1,null,null,null,1,null,null
+61,Earl Grey,7,null,5.25,1,1,1,1,null,null,null,1,null,null
+62,Osmanthus,7,null,5.25,1,1,1,1,null,null,null,1,null,null
+63,White Grape Oolong,7,null,5.25,1,1,1,1,null,null,null,1,null,null
+64,Mango,8,null,5.75,0,1,1,1,null,null,null,0,null,null
+65,Strawberry,8,null,5.75,0,1,1,1,null,null,null,0,null,null
+66,Honey Ginger,8,null,5.75,0,1,1,1,null,null,null,0,null,null
+67,Yuzu Citrus,8,null,5.75,0,1,1,1,null,null,null,0,null,null
+68,Passion Fruit,8,null,5.75,0,1,1,1,null,null,null,0,null,null
+69,Peach,8,null,5.75,0,1,1,1,null,null,null,0,null,null
+70,Taro  (Smoothie Only),8,null,5.75,0,1,1,1,null,null,null,0,null,null
+71,Matcha Read Bean (Smoothie Only),8,null,5.75,0,1,1,1,null,null,null,0,null,null
+72,Brown Sugar Boba Milk with Cream,9,null,5.95,0,0,1,1,null,null,null,0,null,null
+73,Mango Sago,9,null,6.55,0,0,1,0,null,null,null,0,null,null
+74,Key Lime Sunrise,9,null,6.55,0,0,1,0,null,null,null,0,null,null
+75,Strawberry Mochi Milk with Cream,9,null,6.95,0,0,1,0,null,null,null,0,null,null
+76,Grape Festival,9,null,6.95,0,0,1,0,null,null,null,0,null,null
+77,Mashed Taro Milk Tea,9,null,6.95,0,0,1,0,null,null,null,0,null,null
+78,Mochi Milk Tea with Oat,9,null,6.95,0,0,1,0,null,null,null,0,null,null
+79,Matcha Strawberry with Oat,9,null,6.95,0,0,1,0,null,null,null,0,null,null
