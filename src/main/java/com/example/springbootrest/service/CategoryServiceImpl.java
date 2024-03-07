@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<Category> findAllRootCategories() {
-        return categoryDAO.findByRoot("null");
+        return categoryDAO.findByRootIsNull();
     }
 
     @Override
