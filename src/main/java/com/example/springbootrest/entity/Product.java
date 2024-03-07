@@ -24,28 +24,32 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="pid")
     private int pid;
-
-    @Column(unique = true)
-    private String product_name;
-
+    @Column(name="product_name", unique = true)
+    private String productName;
     @Column(name="cid")
     private int cid;
-
     @Column(name="product_desc")
-    private String product_desc;
-
+    private String productDesc;
     @Column(name="base_price")
-    private float base_price;
-
+    private float basePrice;
+    @Column(name="has_flavor")
+    private boolean hasFlavor;
     @Column(name="enable_hot")
     private boolean enable_hot;
-
     @Column(name="enable_cold")
-    private boolean enable_cold;
-
+    private boolean enableCold;
+    @Column(name="enable_large")
+    private boolean enableLarge;
+    @Column(name="avail_sugar_level")
+    private String availSugarLevel;
+    @Column(name="avail_ice_level")
+    private String availIceLevel;
     @Column(name="topping_blacklist")
-    private String topping_blacklist;
-
+    private String toppingBlacklist;
+    @Column(name="free_topping_quantity")
+    private int freeToppingQuantity;
+    @Column(name="ice_cream_container")
+    private String iceCreamContainer;
     @Column(name="tags")
     private String tags;
 
@@ -57,81 +61,116 @@ public class Product {
         this.pid = pid;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
-
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String product_name) {
+        this.productName = product_name;
     }
-
     public int getCid() {
         return cid;
     }
-
     public void setCid(int cid) {
         this.cid = cid;
     }
-
-    public String getProduct_desc() {
-        return product_desc;
+    public String getProductDesc() {
+        return productDesc;
     }
-
-    public void setProduct_desc(String description) {
-        this.product_desc = description;
+    public void setProductDesc(String description) {
+        this.productDesc = description;
     }
-
-    public float getBase_price() {
-        return base_price;
+    public float getBasePrice() {
+        return basePrice;
     }
-
-    public void setBase_price(float base_price) {
-        this.base_price = base_price;
+    public void setBasePrice(float base_price) {
+        this.basePrice = base_price;
     }
-
     public boolean isEnable_hot() {
         return enable_hot;
     }
-
     public void setEnable_hot(boolean enable_hot) {
         this.enable_hot = enable_hot;
     }
-
-    public boolean isEnable_cold() {
-        return enable_cold;
+    public boolean isEnableCold() {
+        return enableCold;
     }
-
-    public void setEnable_cold(boolean enable_cold) {
-        this.enable_cold = enable_cold;
+    public void setEnableCold(boolean enable_cold) {
+        this.enableCold = enable_cold;
     }
-
-    public String getTopping_blacklist() {
-        return topping_blacklist;
-    }
-
-    public void setTopping_blacklist(String topping_blacklist) {
-        this.topping_blacklist = topping_blacklist;
-    }
-
     public String getTags() {
         return tags;
     }
-
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public boolean isHasFlavor() {
+        return hasFlavor;
+    }
+
+    public void setHasFlavor(boolean hasFlavor) {
+        this.hasFlavor = hasFlavor;
+    }
+
+    public boolean isEnableLarge() {
+        return enableLarge;
+    }
+
+    public void setEnableLarge(boolean enableLarge) {
+        this.enableLarge = enableLarge;
+    }
+
+    public String getAvailSugarLevel() {
+        return availSugarLevel;
+    }
+
+    public void setAvailSugarLevel(String availSugarLevel) {
+        this.availSugarLevel = availSugarLevel;
+    }
+
+    public String getAvailIceLevel() {
+        return availIceLevel;
+    }
+
+    public void setAvailIceLevel(String availIceLevel) {
+        this.availIceLevel = availIceLevel;
+    }
+
+    public String getToppingBlacklist() {
+        return toppingBlacklist;
+    }
+
+    public void setToppingBlacklist(String toppingBlacklist) {
+        this.toppingBlacklist = toppingBlacklist;
+    }
+
+    public int getFreeToppingQuantity() {
+        return freeToppingQuantity;
+    }
+
+    public void setFreeToppingQuantity(int freeToppingQuantity) {
+        this.freeToppingQuantity = freeToppingQuantity;
+    }
+
+    public String getIceCreamContainer() {
+        return iceCreamContainer;
+    }
+
+    public void setIceCreamContainer(String iceCreamContainer) {
+        this.iceCreamContainer = iceCreamContainer;
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "pid=" + pid +
-                ", product_name='" + product_name + '\'' +
+                ", product_name='" + productName + '\'' +
                 ", cid=" + cid +
-                ", description='" + product_desc + '\'' +
-                ", base_price=" + base_price +
+                ", description='" + productDesc + '\'' +
+                ", base_price=" + basePrice +
                 ", enable_hot=" + enable_hot +
-                ", enable_cold=" + enable_cold +
-                ", topping_blacklist='" + topping_blacklist + '\'' +
+                ", enable_cold=" + enableCold +
+                ", topping_blacklist='" + toppingBlacklist + '\'' +
                 ", tags='" + tags + '\'' +
                 '}';
     }

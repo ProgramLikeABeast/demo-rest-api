@@ -20,6 +20,7 @@ public class DataRestController {
     private WidgetService widgetService;
     private ProductService productService;
     private SmallImageService smallImageService;
+    private CategoryService categoryService;
     // inject user dao
     @Autowired
     public  DataRestController(
@@ -27,13 +28,15 @@ public class DataRestController {
             StrategyService theStrategyService,
             WidgetService theWidgetService,
             ProductService theProductService,
-            SmallImageService theSmallImageService
+            SmallImageService theSmallImageService,
+            CategoryService theCategoryService
             ) {
         userService = theUserService;
         strategyService = theStrategyService;
         widgetService = theWidgetService;
         productService = theProductService;
         smallImageService = theSmallImageService;
+        categoryService = theCategoryService;
     }
 
     @GetMapping("/")
@@ -71,8 +74,7 @@ public class DataRestController {
     @PutMapping("/users")
     public User updateUser(@RequestBody User theUser) {
 
-        User dbUser = userService.save(theUser);
-        return dbUser;
+        return userService.save(theUser);
     }
 
     // Delete one
@@ -257,6 +259,16 @@ public class DataRestController {
         return theProduct;
     }
 
+    @GetMapping("/products/byCategory/{cid}")
+    public List<Product> findProductByCid(@PathVariable int cid){
+        return productService.findByCategory(cid);
+    }
+
+    @GetMapping("/4products/byCategory/{cid}")
+    public List<Product> findFirst4ProductByCid(@PathVariable int cid){
+        return productService.find4ByCategory(cid);
+    }
+
     @GetMapping("/products")
     public List<Product> findAllProducts() {
         return productService.findAll();
@@ -315,5 +327,41 @@ public class DataRestController {
     public String deleteAllSmallImages() {
         smallImageService.deleteAll();
         return "Deleted all small images.";
+    }
+
+    // category endpoints
+    @GetMapping("/categories")
+    public List<Category> findAllCategories() {
+        return categoryService.findAll();
+    }
+
+    @GetMapping("/categories/{cid}")
+    public Category getCategory(@PathVariable int cid) {
+        Category theCategory = categoryService.findByCid(cid);
+
+        if(theCategory == null) {
+            throw new RuntimeException("Category id not found - " + theCategory);
+        }
+        return theCategory;
+    }
+
+    @GetMapping("/categories/root")
+    public List<Category> getRootCategories() {
+        List<Category> rootCategories = categoryService.findAllRootCategories();
+
+        if(rootCategories == null) {
+            throw new RuntimeException("root categories not found - ");
+        }
+        return rootCategories;
+    }
+
+    @GetMapping("/categories/root/{root}")
+    public List<Category> getCategoriesByRoot(@PathVariable String root) {
+        List<Category> theCategories = categoryService.findAllCategoriesByRoot(root);
+
+        if(theCategories == null) {
+            throw new RuntimeException("Category id not found from root " + theCategories);
+        }
+        return theCategories;
     }
 }

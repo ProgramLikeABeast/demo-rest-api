@@ -4,7 +4,6 @@ import com.example.springbootrest.DAO.ProductRepository;
 import com.example.springbootrest.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,20 +12,20 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService{
 
-    private final ProductRepository productRepository;
+    private final ProductRepository productDAO;
     @Autowired
     public ProductServiceImpl(ProductRepository theProductRepository) {
-        productRepository = theProductRepository;
+        productDAO = theProductRepository;
     }
 
     @Override
     public List<Product> findAll() {
-        return productRepository.findAll();
+        return productDAO.findAll();
     }
 
     @Override
     public Product findById(int theId) {
-        Optional<Product> result = productRepository.findById(theId);
+        Optional<Product> result = productDAO.findById(theId);
 
         Product theProduct = null;
         if(result.isPresent()) {
@@ -40,16 +39,26 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product saveProduct(Product theProduct) throws IOException {
-        return productRepository.save(theProduct);
+        return productDAO.save(theProduct);
     }
 
     @Override
     public void deleteAll() {
-        productRepository.deleteAll();
+        productDAO.deleteAll();
     }
 
     @Override
     public long getcount() {
-        return productRepository.count();
+        return productDAO.count();
+    }
+
+    @Override
+    public List<Product> findByCategory(int theCid) {
+        return productDAO.findByCid(theCid);
+    }
+
+    @Override
+    public List<Product> find4ByCategory(int theCid) {
+        return productDAO.findTop4ByCidOrderByPid(theCid);
     }
 }
