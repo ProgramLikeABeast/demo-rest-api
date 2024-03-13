@@ -2,6 +2,9 @@ package com.example.springbootrest.rest;
 
 import com.example.springbootrest.entity.*;
 import com.example.springbootrest.service.*;
+import net.coobird.thumbnailator.Thumbnails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,6 +28,7 @@ public class DataRestController {
     private ProductService productService;
     private SmallImageService smallImageService;
     private CategoryService categoryService;
+    private static final Logger logger = LoggerFactory.getLogger(DataRestController.class);
     // inject user dao
     @Autowired
     public  DataRestController(
@@ -38,6 +46,7 @@ public class DataRestController {
         smallImageService = theSmallImageService;
         categoryService = theCategoryService;
     }
+
 
     @GetMapping("/")
     public String welcome() {
@@ -317,6 +326,56 @@ public class DataRestController {
         );
         try {
             smallImageService.saveImage(retImage);
+            logger.info("******************************************");
+            return ResponseEntity.ok("Small image uploaded successfully. File ID: " + retImage.getSiid());
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload the small image");
+        }
+    }
+
+    @PostMapping(value="/small_images/limit64kb", consumes = {"multipart/form-data"})
+    public ResponseEntity<String> uploadSmallImageLimit64kb(
+            @RequestParam(value="image", required=false) MultipartFile theImage,
+            @RequestParam(value="name", required=true) String name,
+            @RequestParam(value="pid", required=true) Integer pid
+    ) throws IOException {
+        logger.info("******************************************");
+        try {
+            final float maxFileSize = (float) 64 * 1024; // 64 KB
+            BufferedImage originalImage = ImageIO.read(theImage.getInputStream());
+            double scale = 1.0; // Start with original size
+            byte[] imageBytes;
+            boolean divided = false;
+
+            logger.info("*********************" + scale + "*********************");
+
+            do {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                // Dynamically adjust scale to reduce file size
+                BufferedImage scaledImage = Thumbnails.of(originalImage)
+                        .scale(scale)
+                        .asBufferedImage();
+
+                ImageIO.write(scaledImage, "png", baos);
+                imageBytes = baos.toByteArray();
+
+                if(!divided && maxFileSize < imageBytes.length){
+                    scale = maxFileSize / imageBytes.length;
+                    divided = true;
+                }
+                scale *= 0.05; // Decrease scale by 5%
+            } while (imageBytes.length > maxFileSize);
+
+            logger.info("*********************" + imageBytes.length + "*********************");
+
+            SmallImage retImage = new SmallImage(
+                    pid,
+                    theImage.getName(),
+                    theImage.getContentType(),
+                    imageBytes
+            );
+
+            smallImageService.saveImage(retImage);
             return ResponseEntity.ok("Small image uploaded successfully. File ID: " + retImage.getSiid());
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload the small image");
@@ -360,7 +419,7 @@ public class DataRestController {
         List<Category> theCategories = categoryService.findAllCategoriesByRoot(root);
 
         if(theCategories == null) {
-            throw new RuntimeException("Category id not found from root " + theCategories);
+            throw new RuntimeException("Category id not found from root " + root);
         }
         return theCategories;
     }
