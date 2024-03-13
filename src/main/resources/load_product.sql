@@ -7,6 +7,7 @@ IGNORE 1 ROWS
 SET tags = NULLIF(@var, "null");
 
 SET SQL_SAFE_UPDATES = 0;
+
 UPDATE data_directory.products
 SET tags = TRIM(TRAILING '\r' FROM tags)
 WHERE tags LIKE '%\r';

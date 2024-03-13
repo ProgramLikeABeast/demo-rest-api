@@ -61,4 +61,9 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> find4ByCategory(int theCid) {
         return productDAO.findTop4ByCidOrderByPid(theCid);
     }
+
+    @Override
+    public Product findByProductName(String name) {
+        return productDAO.findByProductName(name);
+    }
 }

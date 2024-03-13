@@ -10,6 +10,7 @@ public interface ProductService {
     Product findById(int theId);
     List<Product> findByCategory(int theCid);
     List<Product> find4ByCategory(int theCid);
+    Product findByProductName(String name);
     Product saveProduct(Product theWidget) throws IOException;
     void deleteAll();
     long getcount();

@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByCid(int cid);
     List<Product> findTop4ByCidOrderByPid(int cid);
+
+    Product findByProductName(String name);
 }

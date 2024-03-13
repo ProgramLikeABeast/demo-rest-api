@@ -278,6 +278,11 @@ public class DataRestController {
         return productService.find4ByCategory(cid);
     }
 
+    @GetMapping("/products/byName/{productName}")
+    public Product findProductByName(@PathVariable String productName){
+        return productService.findByProductName(productName);
+    }
+
     @GetMapping("/products")
     public List<Product> findAllProducts() {
         return productService.findAll();

@@ -7,6 +7,7 @@ IGNORE 1 ROWS
 SET root_category = NULLIF(@var, "null");
 
 SET SQL_SAFE_UPDATES = 0;
+
 UPDATE data_directory.categories
 SET root_category = TRIM(TRAILING '\r' FROM root_category)
 WHERE root_category LIKE '%\r';
