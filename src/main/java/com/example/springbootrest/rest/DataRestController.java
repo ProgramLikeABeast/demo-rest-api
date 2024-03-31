@@ -28,6 +28,7 @@ public class DataRestController {
     private ProductService productService;
     private SmallImageService smallImageService;
     private CategoryService categoryService;
+    private OrderService orderService;
     private static final Logger logger = LoggerFactory.getLogger(DataRestController.class);
     // inject user dao
     @Autowired
@@ -37,7 +38,8 @@ public class DataRestController {
             WidgetService theWidgetService,
             ProductService theProductService,
             SmallImageService theSmallImageService,
-            CategoryService theCategoryService
+            CategoryService theCategoryService,
+            OrderService theOrderService
             ) {
         userService = theUserService;
         strategyService = theStrategyService;
@@ -45,6 +47,7 @@ public class DataRestController {
         productService = theProductService;
         smallImageService = theSmallImageService;
         categoryService = theCategoryService;
+        orderService = theOrderService;
     }
 
 
@@ -427,5 +430,63 @@ public class DataRestController {
             throw new RuntimeException("Category id not found from root " + root);
         }
         return theCategories;
+    }
+
+    // order endpoints
+    @GetMapping("/orders")
+    public List<Order> getAllOrders(){
+        return orderService.findAll();
+    }
+    @PostMapping("/orders")
+    public Order addOrder(@RequestBody Order theOrder){
+        return orderService.save(theOrder);
+    }
+    @GetMapping("/orders/byOid/{oid}")
+    public Order getOrderByOid(@PathVariable int oid){
+        Order theOrder = orderService.findByOid(oid);
+
+        if(theOrder == null) {
+            throw new RuntimeException("Order id not found - " + oid);
+        }
+        return theOrder;
+    }
+    @GetMapping("/orders/byUid/{uid}")
+    public List<Order> getOrderByUid(@PathVariable int uid){
+        return orderService.findByUid(uid);
+    }
+    @GetMapping("/orders/queue")
+    public List<Order> getTheQueue(){
+        return orderService.findAllUnprocessedOrders(0);
+    }
+    @PostMapping("/orders/process/{oid}")
+    public Order processOrder(@PathVariable int oid){
+        Order theOrder = orderService.findByOid(oid);
+
+        if(theOrder == null) {
+            throw new RuntimeException("Order id not found - " + oid);
+        }
+
+        theOrder.setStatus(1);
+        orderService.save(theOrder);
+
+        return theOrder;
+    }
+
+    @DeleteMapping("/orders/{oid}")
+    public String deleteOrder(@PathVariable int oid) {
+
+        Order tempUser = orderService.findByOid(oid);
+        if(tempUser == null) {
+            throw new RuntimeException("Order id not found - " + oid);
+        }
+
+        orderService.deleteByOid(oid);
+        return "Deleted order id-" + oid;
+    }
+
+    @DeleteMapping("/orders")
+    public String deleteAllOrders() {
+        orderService.deleteAll();
+        return "Deleted all orders.";
     }
 }
