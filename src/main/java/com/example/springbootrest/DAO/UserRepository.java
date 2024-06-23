@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     // that's it ... no need to write any code
+    User findUserByEmail(String email);
     List<User> findUsersByEmailAndPassword(String email, String password);
 }

@@ -73,6 +73,11 @@ public class DataRestController {
         return theUser;
     }
 
+    @GetMapping("/users/byEmail/{userEmail}")
+    public User getUser(@PathVariable String userEmail) {
+        return userService.findByEmail(userEmail);
+    }
+
     // create new
     @PostMapping("/users")
     public User addUser(@RequestBody User theUser) {
@@ -439,6 +444,7 @@ public class DataRestController {
     }
     @PostMapping("/orders")
     public Order addOrder(@RequestBody Order theOrder){
+        theOrder.setOid(0);
         return orderService.save(theOrder);
     }
     @GetMapping("/orders/byOid/{oid}")
