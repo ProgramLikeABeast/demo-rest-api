@@ -20,6 +20,8 @@ CREATE TABLE users (
     pwd VARCHAR(50),
     email VARCHAR(50),
     momo_stamp INT,
+    award INT,
+    balance DOUBLE,
     UNIQUE(username, email),
     PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

@@ -2,13 +2,13 @@ package com.example.springbootrest.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 
 @Entity
 @Table(name="users")
 public class User {
 
-    public User() {
-    }
     // define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,10 @@ public class User {
     private String email;
     @Column(name="momo_stamp")
     private int momo_stamp;
+    @Column(name="award")
+    private int award;
+    @Column(name="balance")
+    private double balance;
 
     public int getUid() {
         return uid;
@@ -72,15 +76,34 @@ public class User {
         this.momo_stamp = momo_coins;
     }
 
+    public int getAward() {
+        return award;
+    }
+
+    public void setAward(int award) {
+        this.award = award;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + uid +
+                "uid=" + uid +
                 ", phone='" + phone + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", momo_coins=" + momo_stamp +
+                ", momo_stamp=" + momo_stamp +
+                ", award=" + award +
+                ", balance=" + balance +
                 '}';
     }
+
 }
