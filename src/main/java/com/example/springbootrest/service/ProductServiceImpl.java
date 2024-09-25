@@ -2,6 +2,7 @@ package com.example.springbootrest.service;
 
 import com.example.springbootrest.DAO.ProductRepository;
 import com.example.springbootrest.entity.Product;
+import com.example.springbootrest.service.interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productDAO;
     @Autowired

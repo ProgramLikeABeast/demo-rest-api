@@ -2,15 +2,15 @@ package com.example.springbootrest.service;
 
 import com.example.springbootrest.DAO.CategoryRepository;
 import com.example.springbootrest.entity.Category;
+import com.example.springbootrest.service.interfaces.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryDAO;
     @Autowired
     public CategoryServiceImpl(CategoryRepository theProductRepository) {

@@ -1,8 +1,6 @@
-package com.example.springbootrest.service;
+package com.example.springbootrest.service.interfaces;
 
-import com.example.springbootrest.entity.Strategy;
 import com.example.springbootrest.entity.Widget;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 

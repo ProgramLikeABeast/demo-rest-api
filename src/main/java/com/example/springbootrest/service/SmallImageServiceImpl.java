@@ -1,16 +1,15 @@
 package com.example.springbootrest.service;
 
 import com.example.springbootrest.DAO.SmallImageRepository;
-import com.example.springbootrest.DAO.WidgetRepository;
 import com.example.springbootrest.entity.SmallImage;
-import com.example.springbootrest.entity.Widget;
+import com.example.springbootrest.service.interfaces.SmallImageService;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Optional;
 
 @Service
-public class SmallImageServiceImpl implements SmallImageService{
+public class SmallImageServiceImpl implements SmallImageService {
     private SmallImageRepository smallImageRepository;
 
     public SmallImageServiceImpl(SmallImageRepository theRepository) {

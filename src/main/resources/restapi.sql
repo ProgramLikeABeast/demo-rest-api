@@ -22,6 +22,7 @@ CREATE TABLE users (
     momo_stamp INT,
     award INT,
     balance DOUBLE,
+    verified BOOLEAN,
     UNIQUE(username, email),
     PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
@@ -122,4 +123,12 @@ CREATE TABLE payment_methods (
     PRIMARY KEY(`pmid`),
     FOREIGN KEY (uid) REFERENCES users(uid)
 		ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+CREATE TABLE verification_codes(
+	vcid INT,
+    uid INT,
+    user_phone VARCHAR(15),
+    verification_code VARCHAR(10),
+    time_created TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

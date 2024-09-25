@@ -2,6 +2,7 @@ package com.example.springbootrest.service;
 
 import com.example.springbootrest.entity.Order;
 import com.example.springbootrest.DAO.OrderRepository;
+import com.example.springbootrest.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

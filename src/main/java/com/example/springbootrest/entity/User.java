@@ -1,9 +1,7 @@
 package com.example.springbootrest.entity;
 
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
-
+import org.springframework.context.annotation.Lazy;
 
 @Entity
 @Table(name="users")
@@ -12,6 +10,7 @@ public class User {
     // define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Lazy
     private int uid;
     @Column(name="phone")
     private String phone;
@@ -27,6 +26,20 @@ public class User {
     private int award;
     @Column(name="balance")
     private double balance;
+    @Column(name="verified")
+    private boolean verified;
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
 
     public int getUid() {
         return uid;
@@ -107,3 +120,5 @@ public class User {
     }
 
 }
+
+

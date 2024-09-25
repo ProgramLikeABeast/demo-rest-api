@@ -1,7 +1,7 @@
 package com.example.springbootrest.rest;
 
 import com.example.springbootrest.entity.*;
-import com.example.springbootrest.service.*;
+import com.example.springbootrest.service.interfaces.*;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,6 @@ import java.util.List;
 @RestController
 public class DataRestController {
     // expose "/user" and return a list of Users
-    private UserService userService;
     private StrategyService strategyService;
     private WidgetService widgetService;
     private ProductService productService;
@@ -33,7 +32,6 @@ public class DataRestController {
     // inject user dao
     @Autowired
     public  DataRestController(
-            UserService theUserService,
             StrategyService theStrategyService,
             WidgetService theWidgetService,
             ProductService theProductService,
@@ -41,7 +39,6 @@ public class DataRestController {
             CategoryService theCategoryService,
             OrderService theOrderService
             ) {
-        userService = theUserService;
         strategyService = theStrategyService;
         widgetService = theWidgetService;
         productService = theProductService;
@@ -56,68 +53,6 @@ public class DataRestController {
         return "Hello World! <a href=\"/login\">Login</a> <a href=\"/logout\">Logout</a> <a href=\"/user_profile\">user</a>";
     }
 
-    // select all
-    @GetMapping("/users")
-    public List<User> findAllUsers() {
-        return userService.findAll();
-    }
-
-    // select one
-    @GetMapping("/users/{userId}")
-    public User getUser(@PathVariable int userId) {
-        User theUser = userService.findById(userId);
-
-        if(theUser == null) {
-            throw new RuntimeException("User id not found - " + userId);
-        }
-        return theUser;
-    }
-
-    @GetMapping("/users/byEmail/{userEmail}")
-    public User getUser(@PathVariable String userEmail) {
-        return userService.findByEmail(userEmail);
-    }
-
-    // create new
-    @PostMapping("/users")
-    public User addUser(@RequestBody User theUser) {
-        // in case they pass an id on JSON ... set id to 0
-        // is to force a save of a new item ... instead of update
-        theUser.setId(0);
-        return userService.save(theUser);
-    }
-
-    // Update one
-    @PutMapping("/users")
-    public User updateUser(@RequestBody User theUser) {
-
-        return userService.save(theUser);
-    }
-
-    // Delete one
-    @DeleteMapping("/users/{userId}")
-    public String deleteUser(@PathVariable int userId) {
-
-        User tempUser = userService.findById(userId);
-        if(tempUser == null) {
-            throw new RuntimeException("User id not found - " + userId);
-        }
-
-        userService.deleteById(userId);
-        return "Deleted user id - " + userId;
-    }
-
-    // Delete all
-    @DeleteMapping("/users")
-    public String deleteAllUsers() {
-        userService.deleteAll();
-        return "Deleted all users.";
-    }
-
-    @GetMapping("/users/{email}/{password}")
-    public boolean loginAttempt(@PathVariable String email, @PathVariable String password) {
-        return userService.checkUserExistence(email, password);
-    }
     // Strategy Section
 
     // select one
@@ -176,10 +111,6 @@ public class DataRestController {
         strategyService.deleteAll();
         return "Deleted all strategies.";
     }
-
-
-
-
 
 
     // widget endpoints

@@ -2,6 +2,7 @@ package com.example.springbootrest.service;
 
 import com.example.springbootrest.DAO.StrategyRepository;
 import com.example.springbootrest.entity.Strategy;
+import com.example.springbootrest.service.interfaces.StrategyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Service
-public class StrategyServiceImpl implements StrategyService{
+public class StrategyServiceImpl implements StrategyService {
 
     private StrategyRepository strategyRepository;
     @Autowired

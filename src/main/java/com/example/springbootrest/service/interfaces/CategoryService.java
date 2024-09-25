@@ -1,4 +1,4 @@
-package com.example.springbootrest.service;
+package com.example.springbootrest.service.interfaces;
 
 import com.example.springbootrest.entity.Category;
 

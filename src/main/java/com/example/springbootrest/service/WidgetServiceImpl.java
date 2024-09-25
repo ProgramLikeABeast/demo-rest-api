@@ -1,18 +1,15 @@
 package com.example.springbootrest.service;
 
-import com.example.springbootrest.DAO.StrategyRepository;
 import com.example.springbootrest.DAO.WidgetRepository;
-import com.example.springbootrest.entity.Strategy;
 import com.example.springbootrest.entity.Widget;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.springbootrest.service.interfaces.WidgetService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Optional;
 
 @Service
-public class WidgetServiceImpl implements WidgetService{
+public class WidgetServiceImpl implements WidgetService {
     private WidgetRepository widgetRepository;
 
     public WidgetServiceImpl(WidgetRepository widgetRepository) {

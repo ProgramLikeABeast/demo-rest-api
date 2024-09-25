@@ -2,13 +2,14 @@ package com.example.springbootrest.DAO;
 
 import com.example.springbootrest.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     // that's it ... no need to write any code
-    User findUserByEmail(String email);
-    List<User> findUsersByEmailAndPassword(String email, String password);
+    Optional<User> findUserByEmail(String email);
+    Optional<User> findUserByPhone(String phone);
+    List<User> findUsersByPhoneAndPassword(String email, String password);
+    List<User> findUsersByPhoneAndVerified(String email, boolean verified);
 }
