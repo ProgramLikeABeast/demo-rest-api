@@ -86,9 +86,19 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public boolean loginAttempt(@RequestParam String email, @RequestParam String password) {
-        if(!userService.checkUserExistence(email, password)) return false;
-        return userService.checkUserVerified(email);
+    public boolean loginUser(@RequestParam String phone, @RequestParam String password) {
+        if(!userService.checkUserExistence(phone, password)) return false;
+        return userService.checkUserVerified(phone);
+    }
+
+    @GetMapping("check-user")
+    public boolean checkPhoneExists(@RequestParam String phone) {
+        return userService.checkUserVerified(phone);
+    }
+
+    @GetMapping("change-password")
+    public boolean changePassword(@RequestParam String phone, @RequestParam String password) {
+        return userService.updateUserPassword(phone, password);
     }
 
     @GetMapping("/vcs")

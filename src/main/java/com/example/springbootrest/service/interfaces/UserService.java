@@ -17,5 +17,6 @@ public interface UserService {
     boolean checkUserExistence(String phone, String pwd);
     boolean checkUserVerified(String phone);
     void updateUserVerified(String phone, boolean verified);
+    boolean updateUserPassword(String phone, String password);
     User update(User theUser);
 }

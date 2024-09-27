@@ -114,6 +114,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean updateUserPassword(String phone, String password) {
+        Optional<User> retVal = userDAO.findUserByPhone(phone);
+        if(retVal.isPresent()){
+            User user = retVal.get();
+            user.setPassword(password);
+            userDAO.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public User update(User theUser) {
         try {
             return userDAO.save(theUser);
