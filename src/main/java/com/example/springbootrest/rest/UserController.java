@@ -96,7 +96,7 @@ public class UserController {
         return userService.checkUserVerified(phone);
     }
 
-    @GetMapping("change-password")
+    @PostMapping("change-password")
     public boolean changePassword(@RequestParam String phone, @RequestParam String password) {
         return userService.updateUserPassword(phone, password);
     }
