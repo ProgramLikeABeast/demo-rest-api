@@ -55,6 +55,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findVerifiedUsersByEmailAndPassword(String theEmail, String thePassword, boolean verified) throws RuntimeException {
+        Optional<User> result = userDAO.findUsersByEmailAndPasswordAndVerified(theEmail, thePassword,  true);
+        User theUser = null;
+
+        if(result.isPresent()) {
+            theUser = result.get();
+        }else {
+            throw new RuntimeException("Did not find user with email - " + theEmail);
+        }
+
+        return theUser;
+    }
+
+    @Override
     public User findUserByPhone(String phone) {
         Optional<User> result = userDAO.findUserByPhone(phone);
         User theUser = null;

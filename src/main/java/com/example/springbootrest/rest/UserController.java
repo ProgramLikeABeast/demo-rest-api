@@ -86,9 +86,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public boolean loginUser(@RequestParam String phone, @RequestParam String password) {
-        if(!userService.checkUserExistence(phone, password)) return false;
-        return userService.checkUserVerified(phone);
+    public User loginUser(@RequestParam String phone, @RequestParam String password) {
+        return userService.findVerifiedUsersByEmailAndPassword(phone, password, true);
     }
 
     @GetMapping("check-user")
@@ -138,6 +137,11 @@ public class UserController {
         boolean res = verificationCodeService.verifyByPhoneAndCode(phone, code);
         if(res) userService.updateUserVerified(phone, true);
         return res;
+    }
+
+    @PostMapping("/verify-user")
+    public void verifyUser(@RequestParam String phone) {
+        userService.updateUserVerified(phone, true);
     }
 
     private String codeGenerator() {

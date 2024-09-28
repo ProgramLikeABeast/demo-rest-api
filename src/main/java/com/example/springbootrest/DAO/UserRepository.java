@@ -10,6 +10,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     // that's it ... no need to write any code
     Optional<User> findUserByEmail(String email);
     Optional<User> findUserByPhone(String phone);
+    Optional<User> findUsersByEmailAndPasswordAndVerified(String email, String password, boolean verified);
     List<User> findUsersByPhoneAndPassword(String email, String password);
     List<User> findUsersByPhoneAndVerified(String email, boolean verified);
 }
