@@ -86,8 +86,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public User loginUser(@RequestParam String phone, @RequestParam String password) {
-        return userService.findVerifiedUsersByEmailAndPassword(phone, password, true);
+    public User loginUser(@RequestParam String email, @RequestParam String password) {
+        return userService.findVerifiedUsersByEmailAndPassword(email, password, true);
     }
 
     @GetMapping("check-user")
